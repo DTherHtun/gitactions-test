@@ -17,8 +17,8 @@ jobs:
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-        docker build -t ghcr.io/dtherhtun/gitactions-test:${{ github.event.release.tag_name }} .
-        docker push ghcr.io/dtherhtun/gitactions-test:${{ github.event.release.tag_name }}
+        docker build -t ghcr.io/dtherhtun/gitactions-test:${{ github.event.push.tag_name }} .
+        docker push ghcr.io/dtherhtun/gitactions-test:${{ github.event.push.tag_name }}
 
   push_k8s_manifest:
     needs: [docker_bp]
@@ -30,7 +30,7 @@ jobs:
         ref: deploy
     - name: Change Images tags
       run: |
-        sed -i 's+ghcr.io/dtherhtun/gitactions-test:.*$*+ghcr.io/dtherhtun/gitactions-test:${{ github.event.release.tag_name }}+' ./kustomize/bases/hola/deployment.yaml
+        sed -i 's+ghcr.io/dtherhtun/gitactions-test:.*$*+ghcr.io/dtherhtun/gitactions-test:${{ github.event.push.tag_name }}+' ./kustomize/bases/hola/deployment.yaml
         echo ${GITHUB_SHA} > uniqe_sha.txt
     - name: Validate kustomization
       uses: stefanprodan/kube-tools@v1
@@ -45,7 +45,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "Change image version to ${{ github.event.release.tag_name }} " -a
+        git commit -m "Change image version to ${{ github.event.push.tag_name }} " -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
