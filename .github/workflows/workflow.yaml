@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   go_build:
     runs-on: ${{ matrix.os }}
-    if: ${{ github.ref != 'refs/tags/flux' && github.ref != 'refs/heads/deploy' && github.event_name != 'release' }}
+    if: ${{ github.ref != 'refs/tags/flux' && github.ref != 'refs/heads/deploy' && github.ref != 'refs/tags/**' }}
     strategy:
       matrix:
         go-version: [1.15.x]
