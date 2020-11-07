@@ -19,8 +19,8 @@ jobs:
       run: |
         cd ${{ github.workspace }}/GOHOME/src/github.com/${{ github.repository }}/hola/
         echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-        docker build -t ghcr.io/dtherhtun/web-app-flux:${{ github.event.release.tag_name } .
-        docker push ghcr.io/dtherhtun/web-app-flux:${{ github.event.release.tag_name }
+        docker build -t ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name } .
+        docker push ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }
 
   push_k8s_manifest:
     needs: [docker_bp]
@@ -33,7 +33,7 @@ jobs:
         ref: deploy
     - name: Change Images tags
       run: |
-        sed -i 's+ghcr.io/dtherhtun/web-app-flux:.*$*+ghcr.io/dtherhtun/web-app-flux:${{ github.event.release.tag_name }}+' ./kustomize/bases/hola/deployment.yaml
+        sed -i 's+ghcr.io/${{ github.repository }}:.*$*+ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}+' ./kustomize/bases/hola/deployment.yaml
         echo ${GITHUB_SHA} > uniqe_sha.txt
     - name: Validate kustomization
       uses: stefanprodan/kube-tools@v1
