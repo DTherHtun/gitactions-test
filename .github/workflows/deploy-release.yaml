@@ -1,7 +1,8 @@
 name: release-deploy
 on:
-  push:
-    tags: 'v*'
+  release:
+    types:
+      - created
 
 jobs:
   docker_bp:
