@@ -25,7 +25,6 @@ jobs:
   push_k8s_manifest:
     needs: [docker_bp]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
