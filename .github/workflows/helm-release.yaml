@@ -13,8 +13,8 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           charts_dir: charts
-          charts_url: https://dtherhtun.github.io/web-app-flux
+          charts_url: https://dtherhtun.github.io/gitactions-test
           owner: $GITHUB_ACTOR
-          repository: web-app-flux
+          repository: gitactions-test
           branch: gh-pages
           target_dir: .
