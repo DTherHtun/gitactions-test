@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  hola:
+  - apiVersion: v2
+    appVersion: 1.17.0
+    created: "2020-11-09T16:53:54.181115231Z"
+    description: A Helm chart for Kubernetes
+    digest: af8bc381277bf8ab647c61bca4243321f0d5f1a907321588fb8a5bfbc434ad42
+    name: hola
+    type: application
+    urls:
+    - https://dtherhtun.github.io/gitactions-test/hola-0.1.1.tgz
+    version: 0.1.1
+generated: "2020-11-09T16:53:54.180226929Z"
