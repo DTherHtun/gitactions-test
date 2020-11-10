@@ -3,8 +3,8 @@ on:
   release:
     types:
       - created
-      - published
-      - edited
+#     - published
+#     - edited
 
 jobs:
   docker_bp:
